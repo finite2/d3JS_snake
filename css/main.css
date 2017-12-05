@@ -174,3 +174,7 @@ p {
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
+
+.gameModeButton {
+  min-width: 350px
+}

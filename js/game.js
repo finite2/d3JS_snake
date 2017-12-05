@@ -47,11 +47,13 @@ levels.singlePlayer.push(new newLevel([145,146,147,148,149,150,151,152,153,154,1
 levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159], 0, 70, 100, 2));
 levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 0, 60, 100, 2));
 levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159], 8, 75, 150, 2));
-levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 8, 75, 150, 2));
-levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 0, 100, 200, 1, 9));
-levels.singlePlayer.push(new newLevel([100,101,102,103,104,105,106,107,108,212,213,214,215,216,217,218,219,300,301,302,303,304,305,306,307,308,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 0, 100, 200, 1, 1));
-levels.singlePlayer.push(new newLevel([], 45, 250, 200, 5, 4, 30, 30, 20));
-levels.singlePlayer.push(new newLevel([300,301,302,303,304,305,306,307,308,309,310,10,40,70,100,130,160,190,220,250,280,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,620,621,622,623,624,625,626,627,628,629,650,680,710,740,770,800,830,860,890], 0, 250, 200, 3, 4, 30, 30, 20));
+levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 8, 80, 150, 2));
+levels.singlePlayer.push(new newLevel([140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,10,30,50,70,90,110,130,170,190,210,230,250,270,290,310,330,350,370,390], 0, 120, 200, 1, 9));
+levels.singlePlayer.push(new newLevel([100,101,102,103,104,105,106,107,108,212,213,214,215,216,217,218,219,300,301,302,303,304,305,306,307,308,10,30,50,70,90,110,130,150,170,190,210,230,250,270,290,310,330,350,370,390], 0, 100, 200, 1, 1));
+levels.singlePlayer.push(new newLevel([], 45, 270, 200, 5, 4, 30, 30, 20));
+levels.singlePlayer.push(new newLevel([300,301,302,303,304,305,306,307,308,309,310,10,40,70,100,130,160,190,220,250,280,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,620,621,622,623,624,625,626,627,628,629,650,680,710,740,770,800,830,860,890], 0, 280, 200, 3, 4, 30, 30, 20));
+levels.singlePlayer.push(new newLevel([], 15, 500, 200, 10, 10, 30, 30, 20));
+levels.singlePlayer.push(new newLevel([], 60, 1200, 1000, 30, 10, 40, 40, 15));
 
 levels.cooperative = levels.singlePlayer;
 levels.race = levels.singlePlayer;
@@ -407,7 +409,7 @@ function onePlayer(){
   var region = d3.select('#gameRegion')
   
   var div = region.append('div')
-    .classed({'col-xs-2': true, 'col-md-offset-4': true, center: true})
+    .classed({'col-xs-3': true, 'col-xs-offset-3': true, center: true})
     
   div.append('h3')
       .attr('id','level')
@@ -418,7 +420,7 @@ function onePlayer(){
     .html('Current Length: 2')
 
   div = region.append('div')
-    .classed({'col-xs-2': true, center: true})
+    .classed({'col-xs-3': true, center: true})
   
     div.append('h3')
       .attr('id','score')
@@ -434,7 +436,7 @@ function onePlayer(){
     .attr('style','text-align: center')
   
   div = region.append('div')
-    .classed({'col-xs-4': true, 'col-xs-offset-4': true, center: true})
+    .classed({'col-xs-6': true, 'col-xs-offset-3': true, center: true})
   
   div.append('div')
     .classed({'col-xs-4': true, center: true})
@@ -444,20 +446,26 @@ function onePlayer(){
       .attr('id','reset')
       .classed({btn: true, 'btn-warning': true})
       .html('Reset')
+      .on('click', function(){
+        reset(game.player[0], game.levelNo - 1)
+      })
   
   div2 = div.append('div')
     .classed({'col-xs-4': true, center: true})
     .attr('id','player1')
-    .attr('style','text-align: center; margin-top: 30px;')
+    .attr('style','text-align: center; margin-top: 15px;')
   
   div2.append('p')
-    .html('Select Level:')
+    .html('Select Level<br>')
     .append('input')
       .attr('id','startLevel')
       .attr('type','number')
       .attr('min','1')
-      .attr('max','12')
+      .attr('max','14')
       .attr('value','1')
+      .on('change', function(){
+        game.levelNo = this.value;
+      })
   
   div.append('div')
     .classed({'col-xs-4': true, center: true})
@@ -469,7 +477,7 @@ function onePlayer(){
         chooseMode();
       })
   
-  reset(game.player[0])
+  reset(game.player[0], game.levelNo - 1)
   
   game.players = 1;
   game.updateScore = function(player) {
@@ -507,15 +515,13 @@ function onePlayer(){
 
 function twoPlayerRace(){
   
-  d3.select('#gameRegion').selectAll('*').remove()
-  
   var region = d3.select('#gameRegion')
+
+  region.selectAll('*').remove();
   
   var div = region.append('div')
     .classed({'col-xs-6': true, center: true})
   
-  div.append('div')
-    .attr('style', 'height:40px')
   
   div.append('div')
     .classed({center: true})
@@ -529,9 +535,6 @@ function twoPlayerRace(){
   
   var div = region.append('div')
     .classed({'col-xs-6': true, center: true})
-  
-  div.append('div')
-    .attr('style', 'height:40px')
   
   div.append('div')
     .classed({center: true})
@@ -597,9 +600,6 @@ function twoPlayerCooperative(){
     .classed({'col-xs-6': true, center: true})
   
   div.append('div')
-    .attr('style', 'height:40px')
-  
-  div.append('div')
     .classed({center: true})
     .append('h3')
       .attr('id', 'level')
@@ -616,9 +616,6 @@ function twoPlayerCooperative(){
   
   var div = region.append('div')
     .classed({'col-xs-6': true, center: true})
-  
-  div.append('div')
-    .attr('style', 'height:40px')
   
   div.append('div')
     .classed({center: true})
@@ -687,9 +684,6 @@ function twoPlayerVs(){
     .classed({'col-xs-6': true, center: true})
   
   div.append('div')
-    .attr('style', 'height:40px')
-  
-  div.append('div')
     .classed({center: true})
     .append('h3')
       .attr('id', 'playerScore1')
@@ -701,9 +695,6 @@ function twoPlayerVs(){
   
   var div = region.append('div')
     .classed({'col-xs-6': true, center: true})
-  
-  div.append('div')
-    .attr('style', 'height:40px')
   
   div.append('div')
     .classed({center: true})
@@ -770,11 +761,11 @@ function chooseMode() {
   var region = d3.select('#gameRegion')
   
   div = region.append('div')
-    .classed({'col-xs-4': true, 'col-xs-offset-4': true, center: true})
+    .classed({'col-xs-6': true, 'col-xs-offset-3': true, center: true})
   
   div.append('button')
       .attr('id','onePlayer')
-      .classed({btn: true, 'btn-success': true})
+      .classed({btn: true, 'btn-success': true, gameModeButton: true})
       .html('one Player')
       .on('click', function() {
         game.mode = "singlePlayer"
@@ -783,7 +774,7 @@ function chooseMode() {
   
   div.append('button')
       .attr('id','twoPlayerRace')
-      .classed({btn: true, 'btn-success': true})
+      .classed({btn: true, 'btn-success': true, gameModeButton: true})
       .html('Two Player Race')
       .on('click', function(){
         game.mode = "race";
@@ -792,7 +783,7 @@ function chooseMode() {
   
   div.append('button')
       .attr('id','twoPlayerCoop')
-      .classed({btn: true, 'btn-success': true})
+      .classed({btn: true, 'btn-success': true, gameModeButton: true})
       .html('Two Player Co-op')
       .on('click', function(){
         game.mode = "cooperative";
@@ -801,18 +792,33 @@ function chooseMode() {
   
   div.append('button')
       .attr('id','twoPlayerVs')
-      .classed({btn: true, 'btn-success': true})
+      .classed({btn: true, 'btn-success': true, gameModeButton: true})
       .html('Two Player Vs')
       .on('click', function(){
         game.mode = "vs";
         twoPlayerVs();
       })
   
-  div.append('div')
-    .attr('style','height: 40px')
+  div.append('button')
+      .attr('id','controls')
+      .classed({btn: true, 'btn-warning': true, gameModeButton: true})
+      .html('Controls')
+      .on('click', function(){
+        GetControls();
+      })
   
-  div.append('p')
-    .html('Time between moves (milliseconds): ')
+    div.append('div')
+    .attr('style','height: 10px')
+  
+  var div2 = div.append('div')
+    .classed({panel: true, 'panel-info': true});
+  div2.append('div').classed({'panel-heading': true})
+    .append('h3')
+    .html('Options');
+  var div3 = div2.append('div').classed({'panel-body': true})
+    
+    div3.append('p')
+    .html('Time between moves (milliseconds)  ')
     .append('input')
       .attr('id', 'gameSpeed')
       .attr('type', 'number')
@@ -820,12 +826,10 @@ function chooseMode() {
       .on("input", function() {
         game.speed = Number(this.value);
       })
+
   
-    div.append('div')
-    .attr('style','height: 40px')
-  
-  div.append('p')
-    .html('Start level: ')
+  div3.append('p')
+    .html('Start level  ')
     .append('input')
       .attr('id', 'startLevel')
       .attr('type', 'number')
@@ -850,11 +854,46 @@ function runPlayer(player){
   
   
   game.portal(player);
+  
+
 
 }
 
 
+function GetControls() {
+  d3.select('#gameRegion').selectAll('*').remove()
+  
+  var region = d3.select('#gameRegion')
+  
+  div = region.append('div')
+    .classed({'col-xs-4': true, 'col-xs-offset-4': true, center: true})
+  
+  div.append("p")
+    .html("<b>P</b>: pause")
+  
+  div.append('h2')
+    .html("Player One");
+  
+  div.append('p')
+    .html("<b>WASD</b>: move up, left, down, right (arrow keys in single player)");
+  
+  div.append("h2")
+    .html("Player Two");
+  
+  div.append("p")
+    .html("<b>Arrow Keys</b>: move up, left, down, right");
+  
 
+  
+  div.append('button')
+    .attr('id','backBtn')
+    .classed({btn: true, 'btn-success': true})
+    .html('Back')
+    .on('click', function(){
+      chooseMode();
+    });
+  
+}
 
 function runGame() { 
   runPlayer(game.player[0], game.player[0].levelNo);
